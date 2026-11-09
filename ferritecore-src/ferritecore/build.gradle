@@ -1,0 +1,97 @@
+plugins {
+        id 'fabric-loom' version "${loom_version}"
+        id 'maven-publish'
+}
+
+version = project.mod_version.toLowerCase() + '-fabric'
+group = project.maven_group
+
+base {
+        archivesName = project.archives_base_name.toLowerCase()
+}
+
+repositories {
+        maven {
+                name = "Fabric"
+                url = "https://maven.fabricmc.net/"
+        }
+        maven {
+                name = "CentralMirror"
+                url = "https://maven-central.storage-download.googleapis.com/maven2/"
+        }
+        maven {
+                name = "Aliyun"
+                url = "https://maven.aliyun.com/repository/public"
+        }
+        exclusiveContent {
+                forRepository {
+                        maven {
+                                name = "Modrinth"
+                                url = "https://api.modrinth.com/maven"
+                        }
+                }
+                filter {
+                        includeGroup "maven.modrinth"
+                }
+        }
+}
+
+
+loom {
+        splitEnvironmentSourceSets()
+
+        mods {
+                "ferritecore" {
+                        sourceSet sourceSets.main
+                        sourceSet sourceSets.client
+                }
+        }
+
+        accessWidenerPath = file("src/main/resources/ferritecore.accesswidener")
+}
+
+dependencies {
+        minecraft "com.mojang:minecraft:${project.minecraft_version}"
+        mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+//    mappings loom.officialMojangMappings()
+        modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+//      modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+//      modImplementation "maven.modrinth:sodium:mc1.21.1-0.6.13-fabric"
+//      modImplementation "maven.modrinth:lithium:mc1.21.1-0.15.0-fabric"
+//      modImplementation "maven.modrinth:carpet:1.4.147"
+}
+
+tasks.withType(JavaCompile).configureEach {
+        it.options.release = 21
+}
+
+java {
+        withSourcesJar()
+
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+        inputs.property "archivesName", project.base.archivesName
+
+}
+
+// configure the maven publication
+publishing {
+        publications {
+                create("mavenJava", MavenPublication) {
+                        artifactId = project.archives_base_name
+                        from components.java
+                }
+        }
+
+        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+        repositories {
+                // Add repositories to publish to here.
+                // Notice: This block does NOT have the same function as the block in the top level.
+                // The repositories here will be used for publishing your artifact, not for
+                // retrieving dependencies.
+        }
+}

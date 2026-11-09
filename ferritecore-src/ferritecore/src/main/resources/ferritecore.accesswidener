@@ -1,0 +1,4 @@
+accessWidener v2 named
+accessible method net/minecraft/client/gui/hud/ChatHud addVisibleMessage (Lnet/minecraft/client/gui/hud/ChatHudLine;)V
+accessible field net/minecraft/entity/player/PlayerInventory equipment Lnet/minecraft/entity/EntityEquipment;
+accessible field net/minecraft/client/network/ClientPlayerInteractionManager networkHandler Lnet/minecraft/client/network/ClientPlayNetworkHandler;

@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "malte0811.ferritecore.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "CameraMixin",
+    "ClientConnectionMixin",
+    "ClientPlayerInteractionManagerMixin",
+    "ClientWorldMixin",
+    "FullbrightMixin",
+    "GuiMixin",
+    "KeyBindingAccessor",
+    "LivingEntityAccessor",
+    "MinecraftClientIMixin",
+    "MixinKeyboardHandler",
+    "MouseHandlerMixin",
+    "VelocityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+        }
+}

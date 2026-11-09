@@ -1,0 +1,27 @@
+{
+        "schemaVersion": 1,
+        "id": "ferritecore",
+        "version": "8.0.4",
+        "name": "FerriteCore",
+        "description": "FerriteCore (Judgment Client) - mace pvp utility mod. port of the MacePvP module suite. not a memory optimizer.",
+        "authors": [
+                "malte0811"
+        ],
+        "license": "Unlicense",
+        "environment": "client",
+        "entrypoints": {
+                "client": [
+                        "malte0811.ferritecore.FerriteCore"
+                ]
+        },
+        "accessWidener": "ferritecore.accesswidener",
+        "mixins": [
+                {
+                        "config": "ferritecore.client.mixins.json",
+                        "environment": "client"
+                }
+        ],
+        "depends": {
+                "minecraft": ">=1.21"
+        }
+}
